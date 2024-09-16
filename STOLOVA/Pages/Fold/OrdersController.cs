@@ -37,5 +37,41 @@ namespace STOLOVA.Pages.Fold
         {
             return View(await _context.Orders.ToListAsync());
         }
+        public class OrderController : Controller
+        {
+            private readonly ApplicationDbContext _context;
+
+            public OrderController(ApplicationDbContext context)
+            {
+                _context = context;
+            }
+
+            // GET: Order
+            public async Task<IActionResult> Index()
+            {
+                var orders = await _context.Orders.ToListAsync();
+                return View(orders);
+            }
+
+            // GET: Order/Create
+            public IActionResult Create()
+            {
+                return View();
+            }
+
+            // POST: Order/Create
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Create(Order order)
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(order);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(order);
+            }
+        }
     }
 }
