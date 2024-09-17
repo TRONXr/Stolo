@@ -10,7 +10,7 @@ namespace STOLOVA.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+        
         }
 
         /// <inheritdoc />
