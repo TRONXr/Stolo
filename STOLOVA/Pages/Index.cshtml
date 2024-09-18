@@ -30,6 +30,29 @@
     </form>
 </div>
 <div class="text-center">
+    <h1>Список заказов</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <!-- Ваш код для отображения списка заказов -->
+</div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+<div class="text-center">
     <h1 class="display-4">Список заказов</h1>
     <table class="table">
         <thead>
